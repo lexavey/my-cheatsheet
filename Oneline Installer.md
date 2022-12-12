@@ -10,4 +10,4 @@
     export HOME="./" && curl -fsSL https://raw.githubusercontent.com/lexavey/c9install/master/install.sh | bash &>output.txt 2>&1
     
 ## Install git
-    
+    curl -fsSL https://raw.githubusercontent.com/lexavey/my-cheatsheet/main/Install/git.sh | bash &>output.txt 2>&1
