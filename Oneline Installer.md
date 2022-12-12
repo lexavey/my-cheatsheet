@@ -9,3 +9,5 @@
 ## Install Cloud9IDE
     export HOME="./" && curl -fsSL https://raw.githubusercontent.com/lexavey/c9install/master/install.sh | bash &>output.txt 2>&1
     
+## Install git
+    
