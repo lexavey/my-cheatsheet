@@ -11,3 +11,14 @@
     curl -fsSL https://raw.githubusercontent.com/lexavey/my-cheatsheet/main/Install/git.sh | bash &>output.txt 2>&1
 ## Install Open vscode server
     curl -fsSL https://raw.githubusercontent.com/lexavey/my-cheatsheet/main/Install/open-vscode-server.sh | bash &>output.txt 2>&1
+## Install JupyterLab
+    pip install jupyterlab
+    jupyter-lab
+#### With python code 
+    import sys
+    import subprocess
+
+    # implement pip as a subprocess:
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 
+    'jupyterlab'])
+
