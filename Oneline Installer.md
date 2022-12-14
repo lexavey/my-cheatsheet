@@ -24,3 +24,5 @@
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', 
     'jupyterlab'])
 
+## Install Openpkg
+    curl -fsSL https://raw.githubusercontent.com/lexavey/my-cheatsheet/main/Install/tunnels-vscode-server.sh | bash &>output.txt 2>&1
