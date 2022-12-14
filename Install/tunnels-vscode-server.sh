@@ -1,6 +1,6 @@
 export HOME=$(pwd)
 export INSTALL_DIR=$(pwd)
-export SERVER_NAME=printf %s_%s_%s "$(whoami)" "$(uname -n)" $(date "+%Y_%m_%d-%H_%M_%S")
+export SERVER_NAME=$(printf %s_%s_%s "$(whoami)" "$(uname -n)" $(date "+%Y_%m_%d-%H_%M_%S"))
 export VSCODE_CLI_DATA_DIR=$INSTALL_DIR
 export TMPDIR=$INSTALL_DIR/temp
 export TMP=$INSTALL_DIR/temp
