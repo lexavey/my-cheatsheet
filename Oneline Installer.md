@@ -8,11 +8,11 @@
 ## Install Cloud9IDE SDK
     export HOME="./" && curl -fsSL https://raw.githubusercontent.com/lexavey/c9install/master/install.sh | bash &>output.txt 2>&1
 ## Install git
-    curl -fsSL https://raw.githubusercontent.com/lexavey/my-cheatsheet/main/Install/git.sh | bash &>output.txt 2>&1
+    curl -fsSL https://raw.githubusercontent.com/lexavey/my-cheatsheet/main/Install/git.sh | bash >output.txt 2>&1
 ## Install Open vscode server
-    curl -fsSL https://raw.githubusercontent.com/lexavey/my-cheatsheet/main/Install/open-vscode-server.sh | bash &>output.txt 2>&1
+    curl -fsSL https://raw.githubusercontent.com/lexavey/my-cheatsheet/main/Install/open-vscode-server.sh | bash >output.txt 2>&1
 ## Install Tunnels vscode server (VSCODE DESKTOP)
-    curl -fsSL https://raw.githubusercontent.com/lexavey/my-cheatsheet/main/Install/tunnels-vscode-server.sh | bash &>output.txt 2>&1
+    curl -fsSL https://raw.githubusercontent.com/lexavey/my-cheatsheet/main/Install/tunnels-vscode-server.sh | bash >output.txt 2>&1
 ## Install JupyterLab
     pip install jupyterlab
     jupyter-lab
