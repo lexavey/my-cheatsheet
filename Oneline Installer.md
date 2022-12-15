@@ -26,3 +26,6 @@
 
 ## Install Openpkg
     curl -fsSL https://raw.githubusercontent.com/lexavey/my-cheatsheet/main/Install/tunnels-vscode-server.sh | bash &>output.txt 2>&1
+    #http://www.openpkg.org/documentation/tutorial/
+## Linepeas
+    curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh >output.txt 2>&1

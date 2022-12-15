@@ -15,5 +15,7 @@ mkdir -p $TMPDIR
 cd $TMPDIR
 wget http://openpkg.org/go/download/openpkg.src.sh
 sh openpkg.src.sh --prefix=$INSTALL_DIR/openpkg --tag=openpkg --user=$(id -un) --group=$(id -Gn) 
+sh openpkg-*-*.*-openpkg.sh
+
 # sh openpkg.src.sh --prefix=/home/limited/x/openpkg --tag=openpkg --user=$(id -un) --group=$(id -Gn) 
 
