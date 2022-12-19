@@ -57,9 +57,10 @@ if ! has "$BINARY_FILE"; then
     chmod +x $BINARY_FILE
 fi
 if has "$BINARY_FILE"; then
-    if [[ $($BINARY_FILE tunnel user show) == "not logged in" ]]; then
+    CHECK=$($BINARY_FILE tunnel user show)
+    if [ "$CHECK" = "not logged in" ]; then
         LOGS "need login, open $TMP/login.txt"
-        if [[ $(timeout --kill-after=59 59 $BINARY_FILE tunnel user login>$TMP/login.txt) ]];then
+        if [ $(timeout --kill-after=59 59 $BINARY_FILE tunnel user login>$TMP/login.txt) ];then
             LOGS "login ok"
         else
             STATUS "LOGIN TIMEOUT"
