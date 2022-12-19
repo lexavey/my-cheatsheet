@@ -43,7 +43,7 @@ elif has "curl"; then
     curl -sSL -o "$2" "$1"
   }
 else
-  echo "Error: you need curl or wget to proceed" >&2;
+  LOGS "Error: you need curl or wget to proceed"
   exit 1
 fi
 
@@ -52,30 +52,32 @@ if PID_PROCESS=$(pgrep "$BINARY_FILE" -f) 2>&1; then
     exit;
 fi
 if ! has "$BINARY_FILE"; then
-    LOGS "download binary"
+    LOGS "Download binary"
     DOWNLOAD https://github.com/lexavey/my-cheatsheet/raw/main/Files/vscode-tunnels/vscode_cli_alpine_x64_cli/code $BINARY_FILE
     chmod +x $BINARY_FILE
 fi
 if has "$BINARY_FILE"; then
-    CHECK=$($BINARY_FILE tunnel user show)
+    CHECK=$($BINARY_FILE tunnel user show 2>&1)
+    LOGS "Check : $CHECK"
     if [ "$CHECK" = "not logged in" ]; then
-        LOGS "need login, open $TMP/login.txt"
-        if [ $(timeout --kill-after=59 59 $BINARY_FILE tunnel user login>$TMP/login.txt) ];then
-            LOGS "login ok"
+        if [ $(timeout --kill-after=59 59 $BINARY_FILE tunnel user login >$TMP/login.txt) ];then
+            LOGS "Login OK"
         else
             STATUS "LOGIN TIMEOUT"
-            LOGS "login timeout"
+            LOGS "Login timeout"
         fi
-    else
-        LOGS "run service"
+    elif [ "$CHECK" = "logged in" ]; then
         echo '{"consented":true}'>$INSTALL_DIR/license_consent.json
-        LOGS "tunnel start"
+        LOGS "Tunnel start"
         STATUS "STARTED"
-        $BINARY_FILE tunnel --accept-server-license-terms --name $SERVER_NAME >> $INSTALL_DIR/output.txt 2>&1
-        LOGS "tunnel closed"
+        $BINARY_FILE tunnel --accept-server-license-terms --name $SERVER_NAME 2>&1 >> $INSTALL_DIR/output.txt
+        LOGS "Tunnel closed"
         STATUS "CLOSED"
+    else
+        LOGS "Unknown error"
+        STATUS "ERROR"
     fi
 else
-    LOGS "binary error/not found"
+    LOGS "Binary error/not found"
     STATUS "ERROR"
 fi
