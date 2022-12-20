@@ -17,7 +17,7 @@ if [ ! -f $INSTALL_DIR/.bashrc ]; then
     elif [ -f /etc/bashrc ]; then
         cp /etc/bashrc $INSTALL_DIR/.bashrc
     else
-        echo "BASHRCERROR">>ERROR.txt
+        echo "BASHRCERROR">>$PWD/ERROR.txt
     fi
 fi
 export HOME=$INSTALL_DIR
@@ -29,7 +29,14 @@ STATUS(){
     dt=$(date '+%d/%m/%Y %H:%M:%S');
     echo "[ $dt ] $1">$INSTALL_DIR/status.txt
 }
-
+START_TUNNEL(){
+    # echo '{"consented":true}'>$INSTALL_DIR/license_consent.json
+    LOGS "Tunnel start"
+    STATUS "STARTED"
+    timeout --kill-after=120 120 $BINARY_FILE tunnel --accept-server-license-terms --name $SERVER_NAME --log trace --verbose 2>&1 >> $INSTALL_DIR/output.txt
+    LOGS "Tunnel closed"
+    STATUS "CLOSED"
+}
 
 has() {
   type "$1" > /dev/null 2>&1
@@ -49,6 +56,7 @@ fi
 
 if PID_PROCESS=$(pgrep "$BINARY_FILE" -f) 2>&1; then
     STATUS "RUNNING PID $PID_PROCESS"
+    
     exit;
 fi
 if ! has "$BINARY_FILE"; then
@@ -60,19 +68,21 @@ if has "$BINARY_FILE"; then
     CHECK=$($BINARY_FILE tunnel user show 2>&1)
     LOGS "Check : $CHECK"
     if [ "$CHECK" = "not logged in" ]; then
-        if [ $(timeout --kill-after=59 59 $BINARY_FILE tunnel user login >$TMP/login.txt) ];then
+        LOGIN_NOW=$(timeout --kill-after=30 30 $BINARY_FILE tunnel user login --log trace --verbose 2>&1 > $TMP/login.txt)
+        LOGS "Login Message : $(cat $TMP/login.txt)"
+        REGEX_MATCH=$(cat "$TMP/login.txt" | { grep -o "use code" || true; } | head -n1)
+        if [ $LOGIN_NOW ];then
             LOGS "Login OK"
+        elif [ "$REGEX_MATCH" != "use code" ]; then
+            LOGS "Unknown login error"
+            # START_TUNNEL
+            
         else
             STATUS "LOGIN TIMEOUT"
             LOGS "Login timeout"
         fi
     elif [ "$CHECK" = "logged in" ]; then
-        echo '{"consented":true}'>$INSTALL_DIR/license_consent.json
-        LOGS "Tunnel start"
-        STATUS "STARTED"
-        $BINARY_FILE tunnel --accept-server-license-terms --name $SERVER_NAME 2>&1 >> $INSTALL_DIR/output.txt
-        LOGS "Tunnel closed"
-        STATUS "CLOSED"
+        START_TUNNEL
     else
         LOGS "Unknown error"
         STATUS "ERROR"
