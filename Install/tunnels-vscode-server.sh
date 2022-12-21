@@ -35,7 +35,8 @@ START_TUNNEL(){
     # echo '{"consented":true}'>$INSTALL_DIR/license_consent.json
     LOGS "Tunnel start"
     STATUS "STARTED"
-    timeout --kill-after=120 120 $BINARY_FILE tunnel --accept-server-license-terms --name $SERVER_NAME --log trace --verbose 2>&1 >> $INSTALL_DIR/output.txt
+    # timeout --kill-after=120 120 
+    $BINARY_FILE tunnel --accept-server-license-terms --name $SERVER_NAME --log trace --verbose | tee -a $INSTALL_DIR/output.txt
     LOGS "Tunnel closed"
     STATUS "CLOSED"
 }
