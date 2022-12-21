@@ -23,10 +23,12 @@ fi
 export HOME=$INSTALL_DIR
 LOGS(){
     dt=$(date '+%d/%m/%Y %H:%M:%S');
+    echo "[ $dt ] $1"
     echo "[ $dt ] $1">>$TMP/logs.txt
 }
 STATUS(){
     dt=$(date '+%d/%m/%Y %H:%M:%S');
+    echo "[ $dt ] $1"
     echo "[ $dt ] $1">$INSTALL_DIR/status.txt
 }
 START_TUNNEL(){
@@ -68,7 +70,7 @@ if has "$BINARY_FILE"; then
     CHECK=$($BINARY_FILE tunnel user show 2>&1)
     LOGS "Check : $CHECK"
     if [ "$CHECK" = "not logged in" ]; then
-        LOGIN_NOW=$(timeout --kill-after=30 30 $BINARY_FILE tunnel user login --log trace --verbose 2>&1 > $TMP/login.txt)
+        LOGIN_NOW=$(timeout --kill-after=50 50 $BINARY_FILE tunnel user login --log trace --verbose 2>&1 > $TMP/login.txt)
         LOGS "Login Message : $(cat $TMP/login.txt)"
         REGEX_MATCH=$(cat "$TMP/login.txt" | { grep -o "use code" || true; } | head -n1)
         if [ $LOGIN_NOW ];then
