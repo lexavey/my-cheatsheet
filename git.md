@@ -14,3 +14,10 @@
 ## Force add empty file
     
     git add -Af
+## Scan BIG file
+
+    find . -type f -size +100M
+
+
+## Archive all file to git
+    
