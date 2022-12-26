@@ -5,3 +5,5 @@
     firebase init hosting
     firebase emulators:start
     firebase deploy
+
+    Ex : https://hello-9871b.web.app
