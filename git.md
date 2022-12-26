@@ -12,11 +12,16 @@
     find . -type d ! -path "*.git*" -empty -exec touch '{}'/.gitkeep \;
 
 ## Force add empty file
-    
+
     git add -Af
+
 ## Scan BIG file
 
     find . -type f -size +100M
+
+## Git add big file 
+
+    git lfs track ".7z"
 
 
 ## Archive all file to git
