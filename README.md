@@ -1,7 +1,6 @@
 
 ## Show first 100 line of big file
     cat <file> | head -n 100
-
 ## Starting at X line
     tail --lines=+100 <file>
 ## Search file contains
@@ -9,6 +8,9 @@
     grep --exclude=\*.{js,jpg} -rnw './' -e 'password' >> result.txt
 ##### Include
     grep --include=\*.{php,txt} -rnw './' -e 'password' >> result.txt
+## Search and move
+    grep --exclude=\*.{js,jpg} -rl './' -e '</script>'  | xargs mv -t ./html
+
 ## Remove line contains
 ##### awk
     awk '!/pattern/' file > temp && mv temp file
