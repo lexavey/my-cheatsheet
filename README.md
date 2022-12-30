@@ -1,3 +1,7 @@
+# My CheatSheet 
+
+This is simple cheatsheet and maybe a notes 
+
 
 ## Show first 100 line of big file
     cat <file> | head -n 100
