@@ -4,8 +4,9 @@
 ## CS50
     https://code.cs50.io/
 ## Github
-    https://github.com/codespaces
+    https://github.com/codespaces 
     https://github.dev/lexavey/my-cheatsheet
+    # Billing : https://github.com/settings/billing
 ## Vscode
     https://vscode.dev
     https://vscode.dev/azurerepos/048932931/Project/Project

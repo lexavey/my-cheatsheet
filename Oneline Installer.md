@@ -6,7 +6,7 @@
 ##### Use npm
     export HOME=./ && export NVM_DIR="./.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && nvm use 8.0.0 && npm -v 2>&1
 ## Install Cloud9IDE SDK
-    export HOME="./" && curl -fsSL https://raw.githubusercontent.com/lexavey/c9install/master/install.sh | bash &>output.txt 2>&1
+    export HOME="./" && curl -fsSL https://raw.githubusercontent.com/lexavey/c9install/master/install.sh | bash >output.txt 2>&1
 ## Install git
     curl -fsSL https://raw.githubusercontent.com/lexavey/my-cheatsheet/main/Install/git.sh | bash >output.txt 2>&1
 ## Install Open vscode server
@@ -29,3 +29,4 @@
     #http://www.openpkg.org/documentation/tutorial/
 ## Linepeas
     curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh >output.txt 2>&1
+
