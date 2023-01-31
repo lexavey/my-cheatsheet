@@ -1,6 +1,6 @@
 export PWD=$(pwd)
 export INSTALL_DIR="$PWD/vscode-tunnels-server"
-export SERVER_NAME=$(printf "%s_%s" "$(whoami)" "$(uname -n)"|head -c 20);
+export SERVER_NAME=$(printf "%s_%s" "$(whoami)" "$(uname -s)"|head -c 20);
 export VSCODE_CLI_DATA_DIR=$INSTALL_DIR
 export TMPDIR=$INSTALL_DIR/temp
 export TMP=$INSTALL_DIR/temp
